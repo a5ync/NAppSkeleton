@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  div(ng-app="app")
+    div(ng-controller="mainController")
+      //label {{title}}
+      button(type='button' class='btn btn-default' title='Jog Up' ng-click='picturePostProcessing()') start process
