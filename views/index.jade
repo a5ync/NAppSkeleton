@@ -9,10 +9,11 @@ block content
         label Message
         input(type="text", name="message" ng-model="message") 
         label {{response}}
-      button(type='button' class='btn btn-default' title='Jog Up' 
-        ng-click='picturePostProcessing()') start process
+      input( type="file" multiple ng-model="files" file-change)
+      button(type='button' class='btn btn-default' title='Jog Up' ng-click='picturePostProcessing()') start process
       
-         input( type="file" multiple ng-model="files" file-change)
+        //-  <input type="file" multiple ng-model="files" file-change>
+        //-  input( type="file" multiple ng-model="files" file-change)
          //<br><br>
          //Selected: {{ files.length }}
         //input( type="file" ng-model="model.file" change="upload(model)")

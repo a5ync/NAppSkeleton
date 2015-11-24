@@ -1,4 +1,3 @@
-// (function() {
 'use strict';
 
 var app = angular
@@ -38,7 +37,7 @@ app.directive('fileChange', function () {
             var files = event.target.files;
             $scope.$apply(function () {
                 for (var i = 0, length = files.length; i < length; i++) {
-                    $scope.files.push(files[i]);
+                     $scope.files.push(files[i]);
                 }
             });
         });
@@ -71,6 +70,10 @@ app.factory('uploadService', ['$rootScope', function ($rootScope) {
                 $rootScope.$emit('upload:error', e);
             };
 
+            xhr.upload.onprogress = function(e) {
+              console.log(e.loaded);
+            }
+
             // Send to server, where we can then access it with $_FILES['file].
             data.append('file', file, file.name);
             xhr.open('POST', '/upload');
@@ -80,17 +83,19 @@ app.factory('uploadService', ['$rootScope', function ($rootScope) {
 }]);
 
 
-app.controller('mainController',['$scope','$rootScope','uploadService','socket2', function($scope,$rootScope,uploadService,socket2)
+app.controller('mainController',['$scope','$rootScope','uploadService','socket2',
+ function($scope,$rootScope,uploadService,socket2)
 {
   $scope.files = [];
 
-  $scope.$watch('files', function (newValue, oldValue) {
+  $scope.$watchCollection('files', function (newValue, oldValue) {
          // Only act when our property has changed.
          if (newValue != oldValue) {
              console.log('Controller: $scope.files changed. Start upload.');
              for (var i = 0, length = $scope.files.length; i < length; i++) {
                  // Hand file off to uploadService.
                  uploadService.send($scope.files[i]);
+                 console.log('file sent');
              }
          }
      }, true);
@@ -115,8 +120,5 @@ app.controller('mainController',['$scope','$rootScope','uploadService','socket2'
     	$scope.picturePostProcessing = function()
       {
         socket2.emit("status", $scope.message)
-        //socket.emit('status', 'go!');
-        //console.log("test");
     };
   }]);
-// });

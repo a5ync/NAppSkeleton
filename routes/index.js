@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/upload', uploading.single('file'), function(req, res,next) {
     console.log("upload");
-    debugger;
+    //debugger;
       //console.log(req);
      res.status(204).end()
 });
