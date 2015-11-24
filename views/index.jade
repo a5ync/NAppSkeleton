@@ -11,7 +11,11 @@ block content
         label {{response}}
       button(type='button' class='btn btn-default' title='Jog Up' 
         ng-click='picturePostProcessing()') start process
-        
-      form(action="/upload",  method="post", enctype="multipart/form-data")
-        input(type="file", name="displayImage")
-        input(type="submit", name="asd")
+      
+         input( type="file" multiple ng-model="files" file-change)
+         //<br><br>
+         //Selected: {{ files.length }}
+        //input( type="file" ng-model="model.file" change="upload(model)")
+      //- form(action="/upload",  method="post", enctype="multipart/form-data")
+      //-   input(type="file", name="displayImage")
+      //-   input(type="submit", name="asd")
